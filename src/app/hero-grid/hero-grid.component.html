@@ -1,0 +1,46 @@
+<dx-data-grid
+  width="40%"
+  [dataSource]="heroes"
+  keyExpr="id"
+  [showBorders]="true"
+  [showColumnLines]="true"
+  [showRowLines]="true"
+  [allowColumnReordering]="true"
+  [allowColumnResizing]="true"
+  [hoverStateEnabled]="true"
+  (onRowDblClick)="onUpdateClick($event)"
+>
+  <dxo-sorting mode="none"></dxo-sorting>
+
+  <dxi-column
+    *ngFor="let column of heroTable"
+    [caption]="column['ColName']"
+    [dataField]="column['ColField']"
+    [width]="column['ColWidth']"
+    [minWidth]="column['ColMinWidth']"
+    [alignment]="column['ColAlignment']"
+  ></dxi-column>
+
+  <dxi-column
+    caption=""
+    alignment="center"
+    width="120"
+    minWidth="120"
+    [fixed]="true"
+    fixedPosition="right"
+    cellTemplate="functionCell"
+  ></dxi-column>
+
+    <div *dxTemplate="let data of 'functionCell'">
+      <dx-drop-down-button
+        stylingMode="text"
+        text="Update"
+        [splitButton]="true"
+        [useSelectMode]="false"
+        [showArrowIcon]="false"
+        [items]="['Delete']"
+        (onButtonClick)="onUpdateClick(data)"
+        (onItemClick)="onDeleteClick(data)"
+      ></dx-drop-down-button>
+    </div>
+</dx-data-grid>

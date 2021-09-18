@@ -1,31 +1,55 @@
 <h2>My Heroes</h2>
 
-<ul class="heroes">
-  <li
-    *ngFor="let hero of heroes"
-  >
-    <a routerLink="/detail/{{hero.id}}">
-      <span class="badge">
-      {{hero.id}}
-    </span>
-      {{hero.name}}
-    </a>
-    <button
-      class="delete"
-      title="delete hero"
-      (click)="delete(hero)"
-    >x</button>
-  </li>
-</ul>
+<!--<ul class="heroes">-->
+<!--  <li-->
+<!--    *ngFor="let hero of heroes"-->
+<!--  >-->
+<!--&lt;!&ndash;    <a routerLink="/detail/{{hero.id}}">&ndash;&gt;-->
+<!--    <a (click)="showPopupToEdit(hero)">-->
+<!--      <span class="badge">-->
+<!--      {{hero.id}}-->
+<!--    </span>-->
+<!--      {{hero.name}}-->
+<!--    </a>-->
+<!--    <button-->
+<!--      class="delete"-->
+<!--      title="delete hero"-->
+<!--      (click)="delete(hero)"-->
+<!--    >x</button>-->
+<!--  </li>-->
+<!--</ul>-->
 
-<div>
-  <label for="new-hero">Hero name: </label>
-  <input id="new-hero" #heroName/>
-
-  <button
-    class="add-button"
-    (click)="add(heroName.value); heroName.value=''"
-  >
-    Add hero
-  </button>
+<div class="button-container">
+  <dx-button
+    stylingMode="contained"
+    text="Add Hero"
+    type="default"
+    [width]="120"
+    (onClick)="showPopupToInsert()"
+  ></dx-button>
 </div>
+
+<app-hero-grid
+  [heroes]="heroes"
+  (onUpdate)="showPopupToEdit($event)"
+  (onDelete)="deleteHero($event)"
+></app-hero-grid>
+
+<!--<div>-->
+<!--  <label for="new-hero">Hero name: </label>-->
+<!--  <input id="new-hero" #heroName/>-->
+
+<!--  <button-->
+<!--    class="add-button"-->
+<!--    (click)="add(heroName.value); heroName.value=''"-->
+<!--  >-->
+<!--    Add hero-->
+<!--  </button>-->
+<!--</div>-->
+<app-popup
+  *ngIf="selectedHero && popupVisible"
+  [selectedHero]="selectedHero"
+  [popupVisible]="popupVisible"
+  [wantToAddNewHero]="wantToAddNewHero"
+  (onPopupHidden)="hidePopupHero($event)"
+></app-popup>

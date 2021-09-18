@@ -14,11 +14,16 @@ import {Hero} from "../hero";
 })
 
 export class HeroesComponent implements OnInit {
-  // selectedHero?: Hero;
-
+  selectedHero?: Hero;
+  popupVisible: boolean = false;
   heroes: Hero[] = [];
+  wantToAddNewHero: boolean = false;
 
   constructor(private heroService: HeroService, private messageService: MessageService) {
+  }
+
+  ngOnChanges() {
+    this.getHeroes();
   }
 
   ngOnInit() {
@@ -26,25 +31,46 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+    this.heroService.getHeroes().subscribe(heroes => {
+      this.heroes = heroes;
+    });
   }
 
-  // onSelect(hero: Hero): void {
-  //   this.selectedHero = hero;
-  //   this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
-  // }
-
-  add(name: string): void {
-    name = name.trim();
-    if (!name) { return; }
-    this.heroService.addHero({ name } as Hero)
-      .subscribe(hero => {
-        this.heroes.push(hero);
-      });
+  getHeroLatestId(): number {
+    return this.heroes[this.heroes.length - 1].id + 1;
   }
 
-  delete(hero: Hero): void {
+  /**
+   * Delete hero
+   * @param hero
+   */
+  deleteHero(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);
     this.heroService.deleteHero(hero.id).subscribe();
+  }
+
+  showPopupToEdit(hero: Hero): void {
+    this.wantToAddNewHero = false;
+    this.selectedHero = hero;
+    this.popupVisible = true;
+  }
+
+  showPopupToInsert(): void {
+    this.wantToAddNewHero = true;
+    this.selectedHero = {
+      id: this.getHeroLatestId(),
+      name: ''
+    };
+    this.popupVisible = true;
+  }
+
+  /**
+   * Set the popup's status to Close
+   */
+  hidePopupHero(isDataChanged: boolean): void {
+    this.popupVisible = false;
+    if (isDataChanged) {
+      this.getHeroes();
+    }
   }
 }

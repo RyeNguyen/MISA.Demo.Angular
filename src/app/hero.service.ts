@@ -57,6 +57,17 @@ export class HeroService {
     );
   }
 
+  // getHeroesId(): number[] {
+  //   let heroList: Hero[] = [];
+  //   let heroIdList: number[] = [];
+  //   this.getHeroes().subscribe(heroes => heroList = heroes);
+  //   console.log(this.getHeroes().subscribe(heroes => heroes));
+  //   heroList.forEach(hero => {
+  //     heroIdList.push(hero.id);
+  //   })
+  //   return heroIdList;
+  // }
+
   /** POST: add a new hero to the server */
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
@@ -79,6 +90,10 @@ export class HeroService {
       tap(_ => this.log(`delete hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))
     )
+  }
+
+  checkDuplicatedHeroId(id: number): boolean {
+    return true;
   }
 
   searchHeroes(term: string): Observable<Hero[]> {

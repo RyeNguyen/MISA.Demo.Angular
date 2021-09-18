@@ -1,0 +1,47 @@
+<dx-popup
+  class="popup"
+  [width]="300"
+  height="auto"
+  [showTitle]="true"
+  title="Hero's Information"
+  [dragEnabled]="true"
+  [closeOnOutsideClick]="false"
+  [showCloseButton]="false"
+  [(visible)]="popupVisible"
+>
+  <div>
+    <p>
+      Hero's ID:
+      <dx-text-box
+        [readOnly]="true"
+        [(value)]="heroIdAsText"
+      ></dx-text-box>
+    </p>
+    <p>
+      Hero's Name:
+      <dx-text-box
+        [(value)]="newHeroInfo.name"
+        valueChangeEvent="keyup"
+        (onValueChanged)="changeHeroInfo($event)"
+      ></dx-text-box>
+    </p>
+
+    <div class="popup-buttons">
+      <dx-button
+        stylingMode="outlined"
+        text="Close"
+        type="default"
+        [width]="120"
+        (onClick)="hidePopup()"
+      ></dx-button>
+
+      <dx-button
+        stylingMode="contained"
+        text="Save"
+        type="default"
+        [width]="120"
+        (onClick)="saveData()"
+      ></dx-button>
+    </div>
+  </div>
+</dx-popup>

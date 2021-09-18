@@ -17,3 +17,13 @@ h2 {
   color: white;
   background-color: #42545C;
 }
+
+.message-container {
+  position: absolute;
+  top: 32px;
+  right: 64px;
+}
+
+.button-container {
+  margin-bottom: 32px;
+}
