@@ -25,11 +25,3 @@
     </a>
   </dx-sortable>
 </div>
-
-<app-popup
-  *ngIf="selectedHero && popupVisible"
-  [selectedHero]="selectedHero"
-  [popupVisible]="popupVisible"
-  [wantToAddNewHero]="wantToAddNewHero"
-  (onPopupHidden)="hidePopupHero($event)"
-></app-popup>

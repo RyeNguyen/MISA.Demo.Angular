@@ -1,6 +1,7 @@
 import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 import {Hero} from "../hero";
 import HeroTable from '../hero-table';
+import { PopupDataService } from '../services/popup-data.service';
 
 @Component({
   selector: 'app-hero-grid',
@@ -9,18 +10,20 @@ import HeroTable from '../hero-table';
 })
 export class HeroGridComponent implements OnInit {
   @Input() heroes: Hero[];
-  @Output() onUpdate: EventEmitter<any> = new EventEmitter();
   @Output() onDelete: EventEmitter<any> = new EventEmitter();
 
   heroTable = HeroTable;
 
-  constructor() { }
+  constructor(private _popupService: PopupDataService) { }
 
   ngOnInit(): void {
   }
 
   onUpdateClick(data: any): void {
-    this.onUpdate.emit(data.data);
+    //this.onUpdate.emit(data.data);
+    this._popupService.bindHeroInfo(data.data);
+    this._popupService.setPopupType(false);
+    this._popupService.setPopupVisible(true);
   }
 
   onDeleteClick(data: any): void {

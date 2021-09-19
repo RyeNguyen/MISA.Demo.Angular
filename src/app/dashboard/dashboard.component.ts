@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Hero} from '../hero';
 import {HeroService} from '../services/hero.service';
+import { PopupDataService } from '../services/popup-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,14 +10,18 @@ import {HeroService} from '../services/hero.service';
 })
 
 export class DashboardComponent implements OnInit {
-  selectedHero?: Hero;
-  popupVisible: boolean = false;
   heroes: Hero[] = [];
-  wantToAddNewHero: boolean = false;
 
-  constructor(private heroService: HeroService) {}
+  constructor(
+    private heroService: HeroService,
+    private _popupService: PopupDataService) {}
 
   ngOnInit(): void {
+    this._popupService.needToReload$.subscribe(
+      needToReload => {
+        if (needToReload) this.getHeroes();
+      }
+    );
     this.getHeroes();
   }
 
@@ -38,15 +43,8 @@ export class DashboardComponent implements OnInit {
   }
 
   showPopup(hero: Hero): void {
-    this.wantToAddNewHero = false;
-    this.selectedHero = hero;
-    this.popupVisible = true;
-  }
-
-  hidePopupHero(isDataChanged: boolean): void {
-    this.popupVisible = false;
-    if (isDataChanged) {
-      this.getHeroes();
-    }
+    this._popupService.bindHeroInfo(hero);
+    this._popupService.setPopupType(false);
+    this._popupService.setPopupVisible(true);
   }
 }
