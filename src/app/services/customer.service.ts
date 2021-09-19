@@ -147,7 +147,7 @@ let customers: Customer[] = [{
 }];
 
 @Injectable()
-export class Service {
+export class CustomerService {
   getCustomers() {
     return customers;
   }

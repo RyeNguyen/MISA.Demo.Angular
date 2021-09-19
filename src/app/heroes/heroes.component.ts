@@ -3,8 +3,8 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-import {HeroService} from "../hero.service";
-import {MessageService} from "../message.service";
+import {HeroService} from "../services/hero.service";
+import {MessageService} from "../services/message.service";
 import {Hero} from "../hero";
 
 @Component({
@@ -19,8 +19,10 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[] = [];
   wantToAddNewHero: boolean = false;
 
-  constructor(private heroService: HeroService, private messageService: MessageService) {
-  }
+  constructor(
+    private heroService: HeroService,
+    private messageService: MessageService
+  ) {}
 
   ngOnChanges() {
     this.getHeroes();
@@ -31,6 +33,7 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
+    this.heroes = [];
     this.heroService.getHeroes().subscribe(heroes => {
       heroes.forEach(hero => {
         this.heroes.unshift(hero);
