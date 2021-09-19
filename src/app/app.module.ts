@@ -20,6 +20,7 @@ import {
   DxDataGridModule,
   DxPopupModule,
   DxTextBoxModule,
+  DxSelectBoxModule,
   DxScrollViewModule,
   DxSortableModule
 } from 'devextreme-angular';
@@ -52,6 +53,7 @@ import { HeroGridComponent } from './hero-grid/hero-grid.component';
     DxDataGridModule,
     DxPopupModule,
     DxTextBoxModule,
+    DxSelectBoxModule,
     DxScrollViewModule,
     DxSortableModule
   ],

@@ -1,5 +1,7 @@
 <div class="hero-dashboard">
-   <app-hero-search></app-hero-search>
+   <app-hero-search
+    (onHeroSearched)="showPopup($event)"
+   ></app-hero-search>
 
   <h2>Top Heroes</h2>
 

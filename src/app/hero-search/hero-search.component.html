@@ -3,8 +3,11 @@
   <input id="search-box" #searchBox (input)="search(searchBox.value)">
 
   <ul class="search-result">
-    <li *ngFor="let hero of heroes$ | async" >
-      <a routerLink="/detail/{{hero.id}}">
+    <li
+      *ngFor="let hero of heroes$ | async"
+      (click)="selectHero(hero)"
+    >
+      <a>
         {{hero.name}}
       </a>
     </li>

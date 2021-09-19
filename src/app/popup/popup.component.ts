@@ -12,7 +12,7 @@ export class PopupComponent implements OnInit {
   @Input() popupVisible: boolean;
   @Input() wantToAddNewHero: boolean;
 
-  @Output() onPopupHidden: EventEmitter<any> = new EventEmitter();
+  @Output() onPopupHidden: EventEmitter<boolean> = new EventEmitter();
 
   newHeroInfo: Hero;
   heroIdAsText: string;
