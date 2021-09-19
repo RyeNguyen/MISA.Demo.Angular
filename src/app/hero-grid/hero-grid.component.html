@@ -1,10 +1,12 @@
 <dx-data-grid
   width="40%"
+  height="60vh"
   [dataSource]="heroes"
   keyExpr="id"
   [showBorders]="true"
   [showColumnLines]="true"
-  [showRowLines]="true"
+  [showRowLines]="false"
+  [rowAlternationEnabled]="true"
   [allowColumnReordering]="true"
   [allowColumnResizing]="true"
   [hoverStateEnabled]="true"
@@ -26,8 +28,7 @@
     alignment="center"
     width="120"
     minWidth="120"
-    [fixed]="true"
-    fixedPosition="right"
+
     cellTemplate="functionCell"
   ></dxi-column>
 

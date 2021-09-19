@@ -11,7 +11,7 @@ let HeroTable = [
     ColId: 2,
     ColField: 'name',
     ColName: "Hero's Name",
-    ColWidth: 'auto',
+    ColWidth: '400',
     ColMinWidth: 200,
     ColAlignment: 'left'
   }

@@ -32,12 +32,14 @@ export class HeroesComponent implements OnInit {
 
   getHeroes(): void {
     this.heroService.getHeroes().subscribe(heroes => {
-      this.heroes = heroes;
+      heroes.forEach(hero => {
+        this.heroes.unshift(hero);
+      })
     });
   }
 
   getHeroLatestId(): number {
-    return this.heroes[this.heroes.length - 1].id + 1;
+    return this.heroes[0].id + 1;
   }
 
   /**

@@ -19,7 +19,9 @@ import {
   DxDropDownButtonModule,
   DxDataGridModule,
   DxPopupModule,
-  DxTextBoxModule
+  DxTextBoxModule,
+  DxScrollViewModule,
+  DxSortableModule
 } from 'devextreme-angular';
 import { HeroGridComponent } from './hero-grid/hero-grid.component';
 
@@ -49,7 +51,9 @@ import { HeroGridComponent } from './hero-grid/hero-grid.component';
     DxDropDownButtonModule,
     DxDataGridModule,
     DxPopupModule,
-    DxTextBoxModule
+    DxTextBoxModule,
+    DxScrollViewModule,
+    DxSortableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

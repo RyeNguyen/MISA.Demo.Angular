@@ -1,12 +1,25 @@
-<h2>Top Heroes</h2>
+<div class="hero-dashboard">
+  <!-- <app-hero-search></app-hero-search> -->
 
-<app-hero-search></app-hero-search>
+  <h2>Top Heroes</h2>
 
-<div class="heroes-menu">
-  <a
-    *ngFor="let hero of heroes"
-    routerLink="/detail/{{hero.id}}"
-  >
-    {{hero.name}}
+  <!-- <div class="heroes-menu">
+  <a *ngFor="let hero of heroes" routerLink="/detail/{{ hero.id }}">
+    {{ hero.name }}
   </a>
+</div> -->
+
+  <dx-sortable
+    itemOrientation="horizontal"
+    handle=".hero-container"
+    (onReorder)="onHeroReorder($event)"
+  >
+    <a
+    class="hero-container"
+    *ngFor="let hero of heroes"
+
+    >
+      {{ hero.name }}
+    </a>
+  </dx-sortable>
 </div>
